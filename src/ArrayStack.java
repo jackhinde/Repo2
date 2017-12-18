@@ -4,26 +4,33 @@ import java.util.ArrayList;
 public class ArrayStack implements Stack{
     private ArrayList list;
 
+    public ArrayStack(){
+        list = new ArrayList();
+    }
+    
     @Override
     public Object peekTop() {
         if(list.isEmpty())
             throw new IllegalStateException
                     ("Stack is empty");
-        
+        return list.get(0);
     }
 
     @Override
     public Object pop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(list.isEmpty())
+            throw new IllegalStateException
+                    ("Stack is empty");
+        return list.remove(0);
     }
 
     @Override
     public void push(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        list.add(0,obj);
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list.size();
     }
 }
