@@ -42,7 +42,7 @@ public class LinkedPriorityQueue implements PriorityQueue{
 
     @Override
     public void enqueue(Object obj) {
-        System.out.println("Don't do this");
+        throw new IllegalStateException("Must give a priority");
     }
 
     @Override
