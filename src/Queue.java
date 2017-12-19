@@ -1,4 +1,3 @@
-
 public interface Queue {
     public Object peekFront();
     public Object dequeue();
