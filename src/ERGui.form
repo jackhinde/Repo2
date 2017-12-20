@@ -119,16 +119,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Schedule"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnscheduleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btntreatnext">
       <Properties>
         <Property name="text" type="java.lang.String" value="Treat Next"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntreatnextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btntreatall">
       <Properties>
         <Property name="text" type="java.lang.String" value="Treat All"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntreatallActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnfair">
       <Properties>

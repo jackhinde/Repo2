@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +13,12 @@
  */
 public class ERGui extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ERGui
-     */
+    LinkedPriorityQueue ER;
+    int s;
+    
     public ERGui() {
         initComponents();
+        ER = new LinkedPriorityQueue(3);
     }
 
     /**
@@ -47,10 +51,25 @@ public class ERGui extends javax.swing.JFrame {
         jLabel1.setText("Patient Name:");
 
         btnschedule.setText("Schedule");
+        btnschedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnscheduleActionPerformed(evt);
+            }
+        });
 
         btntreatnext.setText("Treat Next");
+        btntreatnext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntreatnextActionPerformed(evt);
+            }
+        });
 
         btntreatall.setText("Treat All");
+        btntreatall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntreatallActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rbtnfair);
         rbtnfair.setText("Fair Condition");
@@ -116,6 +135,43 @@ public class ERGui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnscheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnscheduleActionPerformed
+        if(rbtncritical.isSelected())
+            s = 0;
+        else if(rbtnserious.isSelected())
+            s = 1;
+        else if(rbtnfair.isSelected())
+            s = 2;
+        else{
+            JOptionPane.showMessageDialog(this, "Error - Must select a patient status");
+            return;
+        }
+        if(txtname.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Error - Must provide a name");
+            return;
+        }
+        Patient p = new Patient(txtname.getText(),s);
+        ER.enqueue(p,s);
+        txtqueue.append(p.getName() + "\t" + p.getStatus() + "\tWaiting...\n");
+        buttonGroup1.clearSelection();
+        txtname.setText("");
+    }//GEN-LAST:event_btnscheduleActionPerformed
+
+    private void btntreatnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntreatnextActionPerformed
+        if(ER.hasData()==false)
+            JOptionPane.showMessageDialog(this, "All patients have been treated");
+        Patient p = (Patient)ER.dequeue();
+        txtqueue.append(p.getName() + " has been treated.\n");
+    }//GEN-LAST:event_btntreatnextActionPerformed
+
+    private void btntreatallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntreatallActionPerformed
+        while(ER.hasData()){
+            Patient p = (Patient)ER.dequeue();
+            txtqueue.append(p.getName() + " has been treated.\n");
+        }
+        JOptionPane.showMessageDialog(this, "All patients have been treated");
+    }//GEN-LAST:event_btntreatallActionPerformed
 
     /**
      * @param args the command line arguments
